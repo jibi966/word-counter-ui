@@ -23,18 +23,22 @@ import { useState } from "react";
 function TableShow() {
   const dispatch = useDispatch();
 
+  // Getting data from redux store
   const data = useSelector((store) => store.getDataReducer.urlData);
 
   const [value, setValue] = useState("");
 
+  // handling Delete
   const handleDelete = (id) => {
     dispatch(deletingData(id));
   };
 
+  // handling PUT
   const handleEdit = (id, val) => {
     dispatch(handleFavorite(id, val));
   };
 
+  // handling post
   const handlePost = () => {
     dispatch(handlePostingData(value));
   };
@@ -75,6 +79,7 @@ function TableShow() {
                         <Td>{item.url}</Td>
                         <Td>{item.count}</Td>
                         <Td>
+                          {/* Only added 3 links from website for  */}
                           {item.links.length > 3 ? (
                             <UnorderedList>
                               <ListItem>
@@ -106,6 +111,7 @@ function TableShow() {
                           {item.images.length > 3 ? (
                             <UnorderedList>
                               <ListItem>
+                                {/* Only 3 image links are added */}
                                 {item.images[0].length > 20
                                   ? item.images[0].substring(0, 20)
                                   : item.images[0]}

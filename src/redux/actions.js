@@ -9,12 +9,14 @@ const getAll = (data) => {
   };
 };
 
+// dispatch for getAllData
 export const getAllData = () => (dispatch) => {
   axios.get("http://localhost:3030").then((res) => {
     dispatch(getAll(res.data));
   });
 };
 
+// dispatch for editing the content: ;
 export const handleFavorite = (id, val) => (dispatch) => {
   let newVal;
   if (val === "No") {
@@ -33,6 +35,7 @@ export const handleFavorite = (id, val) => (dispatch) => {
     });
 };
 
+// dispatching for adding the data
 export const handlePostingData = (value) => (dispatch) => {
   axios
     .post("http://localhost:3030/create", {
@@ -48,6 +51,7 @@ export const handlePostingData = (value) => (dispatch) => {
     });
 };
 
+// dispatch for deleting the content: ;
 export const deletingData = (id) => (dispatch) => {
   axios.delete(`http://localhost:3030/remove/${id}`).then(() => {
     console.log("Deleted");

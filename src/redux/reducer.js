@@ -5,6 +5,7 @@ const initialState = {
   urlData: [],
 };
 
+// creating the reducer
 const getDataReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_ALL:
