@@ -11,7 +11,7 @@ const getAll = (data) => {
 
 // dispatch for getAllData
 export const getAllData = () => (dispatch) => {
-  axios.get("http://localhost:3030").then((res) => {
+  axios.get("https://mern-counter.herokuapp.com").then((res) => {
     dispatch(getAll(res.data));
   });
 };
@@ -25,11 +25,11 @@ export const handleFavorite = (id, val) => (dispatch) => {
     newVal = "No";
   }
   axios
-    .put(`http://localhost:3030/update/${id}`, {
+    .put(`https://mern-counter.herokuapp.com/update/${id}`, {
       favorite: newVal,
     })
     .then(() => {
-      axios.get("http://localhost:3030").then((res) => {
+      axios.get("https://mern-counter.herokuapp.com").then((res) => {
         dispatch(getAll(res.data));
       });
     });
@@ -38,11 +38,11 @@ export const handleFavorite = (id, val) => (dispatch) => {
 // dispatching for adding the data
 export const handlePostingData = (value) => (dispatch) => {
   axios
-    .post("http://localhost:3030/create", {
+    .post("https://mern-counter.herokuapp.com/create", {
       url: value,
     })
     .then(() => {
-      axios.get("http://localhost:3030").then((res) => {
+      axios.get("https://mern-counter.herokuapp.com").then((res) => {
         dispatch(getAll(res.data));
       });
     })
@@ -53,7 +53,7 @@ export const handlePostingData = (value) => (dispatch) => {
 
 // dispatch for deleting the content: ;
 export const deletingData = (id) => (dispatch) => {
-  axios.delete(`http://localhost:3030/remove/${id}`).then(() => {
+  axios.delete(`https://mern-counter.herokuapp.com/remove/${id}`).then(() => {
     console.log("Deleted");
     dispatch(getAllData());
   });
