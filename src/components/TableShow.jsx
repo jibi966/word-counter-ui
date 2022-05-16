@@ -13,8 +13,12 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllData } from "../redux/actions";
-import axios from "axios";
+import {
+  getAllData,
+  deletingData,
+  handleFavorite,
+  handlePostingData,
+} from "../redux/actions";
 import { useState } from "react";
 function TableShow() {
   const dispatch = useDispatch();
@@ -24,40 +28,15 @@ function TableShow() {
   const [value, setValue] = useState("");
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3030/remove/${id}`).then(() => {
-      console.log("Deleted");
-      dispatch(getAllData());
-    });
+    dispatch(deletingData(id));
   };
 
   const handleEdit = (id, val) => {
-    let newVal;
-    if (val === "No") {
-      newVal = "Yes";
-    } else {
-      newVal = "No";
-    }
-    axios
-      .put(`http://localhost:3030/update/${id}`, {
-        favorite: newVal,
-      })
-      .then(() => {
-        console.log("Updated");
-        dispatch(getAllData());
-      });
+    dispatch(handleFavorite(id, val));
   };
 
   const handlePost = () => {
-    axios
-      .post("http://localhost:3030/create", {
-        url: value,
-      })
-      .then(() => {
-        dispatch(getAllData());
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    dispatch(handlePostingData(value));
   };
 
   return (
